@@ -88,11 +88,6 @@ app.get('/users/:id', (req, res) =>{
     return result? res.json(result) : res.status(404).send(NotFound);
 });
 
-//Получить список животных конкретного пользователя по его username/id
-app.get('/users/:id/pets', (req, res) =>{
-  res.json({});
-});
-
 //Получить данные конкретного пользователя по его username/id, внутри объекта должен лежить массив pets
 app.get('/users/:usernameOrId/populate', (req, res) =>{
 
@@ -109,7 +104,6 @@ app.get('/users/:usernameOrId/populate', (req, res) =>{
   if(result){
     result['pets']=jsonQuery(`[* userId=${result.id}]`, {data: data.pets}).value;
   }
-  console.log( result );
 
   return result? res.json(result) : res.status(404).send(NotFound);
 });
